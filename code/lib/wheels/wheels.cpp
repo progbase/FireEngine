@@ -37,16 +37,16 @@ void Wheels_stop(void) {
 }
 
 void Wheels_right(void) {
-  turn(BACKWARD, BACKWARD, MOVE);
+  turn(FORWARD, FORWARD, MOVE);
 }
 
 void Wheels_left(void) {
-  turn(FORWARD, FORWARD, MOVE);
+  turn(BACKWARD, BACKWARD, MOVE);
 }
 
 static void turn(bool dir1, bool dir2, int speed) {
   digitalWrite(DIR1, dir1);
-  digitalWrite(DIR2, dir2); //!left wheel is installed in inverse position
+  digitalWrite(DIR2, dir2); //!right wheel is installed in inverse position
   analogWrite(SPD1, speed);
   analogWrite(SPD2, speed);
 }
