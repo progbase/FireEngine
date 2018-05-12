@@ -2,10 +2,7 @@
 #include <fire.h>
 #include <Arduino.h>
 
-#define WPM 7
-
-//@todo
-//make circuit for pump
+#define WPM 13
 
 void Water_setup(void) {
   pinMode(WPM, OUTPUT);
@@ -13,6 +10,10 @@ void Water_setup(void) {
 
 void Water_activate(void) {
   while(Fire_detect()) {
-    digitalWrite(WPM, HIGH);
+    //500000 - experimentally determined value
+    for(long i = 0; i < 500000; i++) {
+      digitalWrite(WPM, HIGH);
+    }
+    digitalWrite(WPM, LOW);
   }
 }
