@@ -58,23 +58,29 @@ static bool checkDist(void) {
 }
 
 static void lookRight(void) {
-  //32000 is a const determined experimentally to make car turn right ~ 60 deg
-  for(int i = 0; i < 33000; i++) {
+  //43000 is a const determined experimentally to make car turn right ~ 60 deg
+  for(size_t i = 0; i < 43000; i++) {
     Wheels_right();
   }
   Wheels_stop();
 }
 
 static void lookLeft(void) {
-  //25000 is a const determined experimentally to make car turn left ~ 60 deg
-  for(int i = 0; i < 25000; i++) {
+  //22000 is a const determined experimentally to make car turn left ~ 60 deg
+  for(size_t i = 0; i < 22000; i++) {
     Wheels_left();
   }
   Wheels_stop();
 }
 
 static void turn90(void (*dir)(void)) {
-  for(int i = 0; i < 30000; i++) {
+  long iterNum;
+  if(dir == Wheels_right) {
+    iterNum = 90000; //experimentally determined
+  } else {
+    iterNum = 39000; //experimentally determined
+  }
+  for(long i = 0; i < iterNum; i++) {
     dir();
   }
   Wheels_stop();
@@ -92,13 +98,13 @@ static double getDist(void) {
 }
 
 static void proceed(void (*dir)(void)) {
-  //20000 is a const determined experimentally to make car move forward ~ 10cm
-  for(int i = 0; i < 20000; i++) {
-    // if(Obstacles_detect()) {
-    //   Obstacles_avoid();
-    //   break;
-    // }
+  //300 is a const determined experimentally to make car move forward ~ 10cm
+  for(size_t i = 0; i < 300; i++) {
     Wheels_forward();
+    if(Obstacles_detect()) {
+      Obstacles_avoid();
+      return;
+    }
   }
   Wheels_stop();
   turn90(dir);
