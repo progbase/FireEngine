@@ -10,10 +10,10 @@ void Water_setup(void) {
 
 void Water_activate(void) {
   while(Fire_detect()) {
-    //500000 - experimentally determined value
-    for(long i = 0; i < 500000; i++) {
+    //1000000 - experimentally determined value
+    for(long i = 0; i < 1000000; i++) {
       digitalWrite(WPM, HIGH);
     }
-    digitalWrite(WPM, LOW);
   }
+  digitalWrite(WPM, LOW);
 }
